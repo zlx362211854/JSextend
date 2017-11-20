@@ -44,3 +44,15 @@ Array.prototype.unique = function () {
     return arr;
 };
 console.log([1, 2, 2, 3].unique()); // [1,2,3]
+
+// 经典闭包
+
+var a = [];// function
+for (var i = 0; i< 10; i++) {
+    a[i] = (function(i) {
+        return function() {
+            console.log(i);
+        }
+    })(i);
+}
+a[6](); // 6
