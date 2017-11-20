@@ -4,12 +4,12 @@
 String.prototype.find = function (str) {
     var originStr = this.valueOf();
     if (str !== '') {
-        var exp = new RegExp(""+str+"", "g");
+        var exp = new RegExp(""+str+"+", "g");
         return exp.test(originStr);
     }
     return false;
 };
-console.log("abcd".find('a'));
+console.log("abcd".find('a')); // true
 
 // Array
 
@@ -24,4 +24,4 @@ Array.prototype.unique = function () {
     }
     return arr;
 };
-console.log([1,2,2,3].unique());
+console.log([1,2,2,3].unique()); // [1,2,3]
