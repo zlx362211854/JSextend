@@ -4,12 +4,31 @@
 String.prototype.find = function (str) {
     var originStr = this.valueOf();
     if (str !== '') {
-        var exp = new RegExp(""+str+"+", "g");
+        var exp = new RegExp("" + str + "+", "g");
         return exp.test(originStr);
     }
     return false;
 };
 console.log("abcd".find('a')); // true
+
+// 获取url对应参数的值
+String.prototype.getQuery = function (name) {
+    var params = this.valueOf(), paramsArr, paramsObj = {};
+    if (params) {
+        if (params.split('?')[1]) {
+            paramsArr = params.split('?')[1].split('&');
+            paramsArr.forEach(function (i) {
+                var obj = i.split('=');
+                paramsObj[obj[0]] = obj[1];
+            });
+            return paramsObj[name];
+        } else {
+            return 'url格式不正确'
+        }
+    }
+};
+console.log('home/page?name=zlx&age=24'.getQuery('name'));
+
 
 // Array
 
@@ -24,4 +43,4 @@ Array.prototype.unique = function () {
     }
     return arr;
 };
-console.log([1,2,2,3].unique()); // [1,2,3]
+console.log([1, 2, 2, 3].unique()); // [1,2,3]
