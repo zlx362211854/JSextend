@@ -56,3 +56,45 @@ for (var i = 0; i< 10; i++) {
     })(i);
 }
 a[6](); // 6
+
+// 判断数字是否在指定区间
+
+function compare(str, num) {
+    var left, right, numL, numR;
+    str = str.replace(/\s/g, '');
+    const interval = str.split(',');
+    const leftStr = interval[0];
+    const rightStr = interval[1];
+
+    numL = leftStr.substr(1);
+    numR = rightStr.substr(0, rightStr.length - 1);
+
+    if (leftStr.charAt(0) === '[') {
+        left = true
+    } else if (leftStr.charAt(0) === '(') {
+        left = false
+    }
+
+    if (rightStr.charAt(rightStr.length - 1) === ']') {
+        right = true
+    } else if (rightStr.charAt(rightStr.length - 1) === ')') {
+        right = false
+    }
+
+    if (left && right) {
+        return num <= Number(numR) && num >= Number(numL);
+    } else if (left && !right) {
+        return num < Number(numR) && num >= Number(numL);
+    } else if (!left && right) {
+        return num <= Number(numR) && num > Number(numL);
+    } else if (!left && !right) {
+        return num < Number(numR) && num > Number(numL);
+    }
+}
+
+console.log(compare('[1.5, 24.56]', 2));
+console.log(compare('[-2, 0]', 0));
+console.log(compare('[1, 2)', 2));
+console.log(compare('[1.5, -8)', 3));
+console.log(compare('[0,0)', 0));
+console.log(compare('(0,5)', 5));
